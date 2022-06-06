@@ -1,0 +1,174 @@
+{
+    "CurrentPlayer TrgPlayer": {
+        "prefix": "CurrentPlayer",
+        "body": ["CurrentPlayer"]
+    },
+    "Foes TrgPlayer": {
+        "prefix": "Foes",
+        "body": ["Foes"]
+    },
+    "Allies TrgPlayer": {
+        "prefix": "Allies",
+        "body": ["Allies"]
+    },
+    "NeutralPlayers TrgPlayer": {
+        "prefix": "NeutralPlayers",
+        "body": ["NeutralPlayers"]
+    },
+    "AllPlayers TrgPlayer": {
+        "prefix": "AllPlayers",
+        "body": ["AllPlayers"]
+    },
+    "Force1 TrgPlayer": {
+        "prefix": "Force1",
+        "body": ["Force1"]
+    },
+    "Force2 TrgPlayer": {
+        "prefix": "Force2",
+        "body": ["Force2"]
+    },
+    "Force3 TrgPlayer": {
+        "prefix": "Force3",
+        "body": ["Force3"]
+    },
+    "Force4 TrgPlayer": {
+        "prefix": "Force4",
+        "body": ["Force4"]
+    },
+    "NonAlliedVictoryPlayers TrgPlayer": {
+        "prefix": "NonAlliedVictoryPlayers",
+        "body": ["NonAlliedVictoryPlayers"]
+    },
+
+    "AtLeast TrgComparison": {
+        "prefix": "AtLeast",
+        "body": ["AtLeast"]
+    },
+    "AtMost TrgComparison": {
+        "prefix": "AtMost",
+        "body": ["AtMost"]
+    },
+    "Exactly TrgComparison": {
+        "prefix": "Exactly",
+        "body": ["Exactly"]
+    },
+
+    "SetTo TrgModifier": {
+        "prefix": "SetTo",
+        "body": ["SetTo"]
+    },
+    "Add TrgModifier": {
+        "prefix": "Add",
+        "body": ["Add"]
+    },
+    "Subtract TrgModifier": {
+        "prefix": "Subtract",
+        "body": ["Subtract"]
+    },
+
+    "All TrgCount": {
+        "prefix": "All",
+        "body": ["All"]
+    },
+
+    "Move TrgOrder": {
+        "prefix": "Move",
+        "body": ["Move"]
+    },
+    "Patrol TrgOrder": {
+        "prefix": "Patrol",
+        "body": ["Patrol"]
+    },
+    "Attack TrgOrder": {
+        "prefix": "Attack",
+        "body": ["Attack"]
+    },
+
+    "Enemy TrgAllyStatus": {
+        "prefix": "Enemy",
+        "body": ["Enemy"]
+    },
+    "Ally TrgAllyStatus": {
+        "prefix": "Ally",
+        "body": ["Ally"]
+    },
+    "AlliedVictory TrgAllyStatus": {
+        "prefix": "AlliedVictory",
+        "body": ["AlliedVictory"]
+    },
+
+    "Enable TrgState": {
+        "prefix": "Enable",
+        "body": ["Enable"]
+    },
+    "Disable TrgState": {
+        "prefix": "Disable",
+        "body": ["Disable"]
+    },
+    "Toggle TrgState": {
+        "prefix": "Toggle",
+        "body": ["Toggle"]
+    },
+    "Set TrgState": {
+        "prefix": "Set",
+        "body": ["Set"]
+    },
+    "Clear TrgState": {
+        "prefix": "Clear",
+        "body": ["Clear"]
+    },
+    "Random TrgState": {
+        "prefix": "Random",
+        "body": ["Random"]
+    },
+    "Cleared TrgState": {
+        "prefix": "Cleared",
+        "body": ["Cleared"]
+    },
+
+    "Ore TrgResource": {
+        "prefix": "Ore",
+        "body": ["Ore"]
+    },
+    "Gas TrgResource": {
+        "prefix": "Gas",
+        "body": ["Gas"]
+    },
+    "OreAndGas TrgResource": {
+        "prefix": "OreAndGas",
+        "body": ["OreAndGas"]
+    },
+
+    "Units TrgScore": {
+        "prefix": "Units",
+        "body": ["Units"]
+    },
+    "Buildings TrgScore": {
+        "prefix": "Buildings",
+        "body": ["Buildings"]
+    },
+    "UnitsAndBuildings TrgScore": {
+        "prefix": "UnitsAndBuildings",
+        "body": ["UnitsAndBuildings"]
+    },
+    "Total TrgScore": {
+        "prefix": "Total",
+        "body": ["Total"]
+    },
+    "Kills TrgScore": {
+        "prefix": "Kills",
+        "body": ["Kills"]
+    },
+    "Razings TrgScore": {
+        "prefix": "Razings",
+        "body": ["Razings"]
+    },
+    "KillsAndRazings TrgScore": {
+        "prefix": "KillsAndRazings",
+        "body": ["KillsAndRazings"]
+    },
+    "Custom TrgScore": {
+        "prefix": "Custom",
+        "body": ["Custom"]
+    }
+}

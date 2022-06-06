@@ -12,9 +12,9 @@
     "For-Each Loop": {
         "prefix": "foreach",
         "body": [
-            "foreach(${2:element} : ${1:array}) {",
+            "foreach (${2:element} : ${1:array}) {",
             "\t$0",
-            "});"
+            "}"
         ],
         "description": "For-Each Loop"
     },
@@ -56,19 +56,81 @@
         ],
         "description": "ElseIf Statement"
     },
+    "Once Statement": {
+        "prefix": "once",
+        "body": [
+            "once(${1:condition}){",
+            "\t$0",
+            "}"
+        ],
+        "description": "Once Statement"
+    },
+    "Once NoCond Statement": {
+        "prefix": "once",
+        "body": [
+            "once{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Once Statement"
+    },
     "Switch Statement": {
         "prefix": "switch",
         "body": [
-            "EUDSwitch(${1:key});",
-            "\tEUDSwitchCase()(${2:value});",
+            "switch (${1:key}) {",
+            "\tcase ${2:value}:",
             "\t\t$0",
             "\t\tbreak;",
             "",
-            "\tEUDSwitchDefault()();",
+            "\tdefault:",
             "\t\tbreak;",
-            "EUDEndSwitch();"
+            "}"
         ],
         "description": "Switch Statement"
+    },
+    "EPDSwitch Statement": {
+        "prefix": "epdswitch",
+        "body": [
+            "epdswitch (${1:epd}, ${2:mask}) {",
+            "\tcase ${3:value}:",
+            "\t\t$0",
+            "\t\tbreak;",
+            "",
+            "\tdefault:",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch Statement"
+    },
+    "Object Statement": {
+        "prefix": "object",
+        "body": [
+            "object ${1:name} {",
+            "\tvar ${2:variable};",
+            "};"
+        ],
+        "description": "Object Statement"
+    },
+    "return Statement": {
+        "prefix": "return",
+        "body": [
+            "return ${1:val};"
+        ],
+        "description": "Return value."
+    },
+    "break Statement": {
+        "prefix": "break",
+        "body": [
+            "break;"
+        ],
+        "description": "Break loop or switch statement."
+    },
+    "continue Statement": {
+        "prefix": "continue",
+        "body": [
+            "continue;"
+        ],
+        "description": "Continue loop or switch statement."
     },
     "While Statement": {
         "prefix": "while",
@@ -95,600 +157,940 @@
         ],
         "description": "Log to the console"
     },
-    "Accumulate": {
-        "prefix": "Accumulate",
-        "body": [
-            "Accumulate(${1:Player}, ${2:Comparison}, ${3:Number}, ${4:ResourceType})"
-        ],
-        "description": "Player accumulates quantity resources."
-    },
-    "Always": {
-        "prefix": "Always",
-        "body": [
-            "Always()"
-        ],
-        "description": "This Condition is always considered true. Keep in mind that all of a trigger’s conditions must be met for it to activate; so adding Always to a trigger with other conditions has no effect."
-    },
-    "Bring": {
-        "prefix": "Bring",
-        "body": [
-            "Bring(${1:Player}, ${2:Comparison}, ${3:Number}, ${4:Unit}, ${5:Location})"
-        ],
-        "description": "Player brings quantity units to location."
-    },
-    "Command": {
-        "prefix": "Command",
-        "body": [
-            "Command(${1:Player}, ${2:Comparison}, ${3:Number}, ${4:Unit})"
-        ],
-        "description": "Player commands quantity units."
-    },
-    "CommandLeast": {
-        "prefix": "CommandLeast",
-        "body": [
-            "CommandLeast(${1:Unit})"
-        ],
-        "description": "Current player commands the least units."
-    },
-    "CommandLeastAt": {
-        "prefix": "CommandLeastAt",
-        "body": [
-            "CommandLeastAt(${1:Unit}, ${2:Location})"
-        ],
-        "description": "Current player commands the least units at location."
-    },
-    "CommandMost": {
-        "prefix": "CommandMost",
-        "body": [
-            "CommandMost(${1:Unit})"
-        ],
-        "description": "Current player commands the most units."
-    },
-    "CommandMostAt": {
-        "prefix": "CommandMostAt",
-        "body": [
-            "CommandMostAt(${1:Unit}, ${2:Location})"
-        ],
-        "description": "Current player commands the most units at location."
-    },
-    "CountdownTimer": {
-        "prefix": "CountdownTimer",
-        "body": [
-            "CountdownTimer(${1:Comparison}, ${2:Time})"
-        ],
-        "description": "Countdown timer is duration game seconds."
-    },
-    "Deaths": {
-        "prefix": "Deaths",
-        "body": [
-            "Deaths(${1:Player}, ${2:Comparison}, ${3:Number}, ${4:Unit})"
-        ],
-        "description": "Player has suffered quantity deaths of unit."
-    },
-    "ElapsedTime": {
-        "prefix": "ElapsedTime",
-        "body": [
-            "ElapsedTime(${1:Comparison}, ${2:Time})"
-        ],
-        "description": "Elapsed scenario time is duration game seconds."
-    },
-    "HighestScore": {
-        "prefix": "HighestScore",
-        "body": [
-            "HighestScore(${1:ScoreType})"
-        ],
-        "description": "Current player has highest score points."
-    },
-    "Kills": {
-        "prefix": "Kills",
-        "body": [
-            "Kills(${1:Player}, ${2:Comparison}, ${3:Number}, ${4:Unit})"
-        ],
-        "description": "Player kills quantity units."
-    },
-    "LeastKills": {
-        "prefix": "LeastKills",
-        "body": [
-            "LeastKills(${1:Unit})"
-        ],
-        "description": "Current player has least kills of unit."
-    },
-    "LeastResources": {
-        "prefix": "LeastResources",
-        "body": [
-            "LeastResources(${1:ResourceType})"
-        ],
-        "description": "Current player has least resources."
-    },
-    "LowestScore": {
-        "prefix": "LowestScore",
-        "body": [
-            "LowestScore(${1:ScoreType})"
-        ],
-        "description": "Current player has lowest score points."
-    },
-    "MostKills": {
-        "prefix": "MostKills",
-        "body": [
-            "MostKills(${1:Unit})"
-        ],
-        "description": "Current player has least kills of unit."
-    },
-    "MostResources": {
-        "prefix": "MostResources",
-        "body": [
-            "MostResources(${1:ResourceType})"
-        ],
-        "description": "Current player has most resources."
-    },
-    "Never": {
-        "prefix": "Never",
-        "body": [
-            "Never()"
-        ],
-        "description": "Never."
-    },
-    "Opponents": {
-        "prefix": "Opponents",
-        "body": [
-            "Opponents(${1:Player}, ${2:Comparison}, ${3:Number})"
-        ],
-        "description": "Player has quantity opponents remaining in the game."
-    },
-    "Score": {
-        "prefix": "Score",
-        "body": [
-            "Score(${1:Player}, ${2:ScoreType}, ${3:Comparison}, ${4:Number})"
-        ],
-        "description": "Player score type score is quantity"
-    },
-    "Switch": {
-        "prefix": "Switch",
-        "body": [
-            "Switch(${1:Switch}, ${2:State})"
-        ],
-        "description": "Switch is set."
-    },
-    "CenterView": {
-        "prefix": "CenterView",
-        "body": [
-            "CenterView(${1:Where});"
-        ],
-        "description": "Center view for current player at location."
-    },
-    "Comment": {
-        "prefix": "Comment",
-        "body": [
-            "Comment(${1:Text});"
-        ],
-        "description": "Comment: comment."
-    },
-    "CreateUnit": {
-        "prefix": "CreateUnit",
-        "body": [
-            "CreateUnit(${1:Number}, ${2:Unit}, ${3:Where}, ${4:ForPlayer});"
-        ],
-        "description": "Create quantity unit at location for player"
-    },
-    "CreateUnitWithProperties": {
-        "prefix": "CreateUnitWithProperties",
-        "body": [
-            "CreateUnitWithProperties(${1:Count}, ${2:Unit}, ${3:Where}, ${4:Player}, ${5:Properties});"
-        ],
-        "description": "Create quantity unit at location for player. Apply properties"
-    },
-    "Defeat": {
-        "prefix": "Defeat",
-        "body": [
-            "Defeat();"
-        ],
-        "description": "End scenario in defeat for current player."
-    },
-    "DisplayText": {
-        "prefix": "DisplayText",
-        "body": [
-            "DisplayText(${1:Text}, ${2:AlwaysDisplay=4});"
-        ],
-        "description": "Display for current player: text."
-    },
-    "Draw": {
-        "prefix": "Draw",
-        "body": [
-            "Draw();"
-        ],
-        "description": "End the scenario in a draw for all players."
-    },
-    "GiveUnits": {
-        "prefix": "GiveUnits",
-        "body": [
-            "GiveUnits(${1:Count}, ${2:Unit}, ${3:Owner}, ${4:Where}, ${5:NewOwner});"
-        ],
-        "description": "Give quantity units owned by player at location to player."
-    },
-    "KillUnit": {
-        "prefix": "KillUnit",
-        "body": [
-            "KillUnit(${1:Unit}, ${2:Player});"
-        ],
-        "description": "Kill all units for player."
-    },
-    "KillUnitAt": {
-        "prefix": "KillUnitAt",
-        "body": [
-            "KillUnitAt(${1:Count}, ${2:Unit}, ${3:Where}, ${4:ForPlayer});"
-        ],
-        "description": "Kill quantity units for player at location."
-    },
-    "LeaderBoardControlAt": {
-        "prefix": "LeaderBoardControlAt",
-        "body": [
-            "LeaderBoardControlAt(${1:Unit}, ${2:Location}, ${3:Label});"
-        ],
-        "description": "Show Leader Board for most control of units at location. Display label: label"
-    },
-    "LeaderBoardControl": {
-        "prefix": "LeaderBoardControl",
-        "body": [
-            "LeaderBoardControl(${1:Unit}, ${2:Label});"
-        ],
-        "description": "Show Leader Board for most control of unit. Display label: label"
-    },
-    "LeaderBoardGreed": {
-        "prefix": "LeaderBoardGreed",
-        "body": [
-            "LeaderBoardGreed(${1:Goal});"
-        ],
-        "description": "Show Greed Leader Board for player closest to accumulation of number ore and gas."
-    },
-    "LeaderBoardKills": {
-        "prefix": "LeaderBoardKills",
-        "body": [
-            "LeaderBoardKills(${1:Unit}, ${2:Label});"
-        ],
-        "description": "Show Leader Board for most kills of unit. Display label: label"
-    },
-    "LeaderBoardScore": {
-        "prefix": "LeaderBoardScore",
-        "body": [
-            "LeaderBoardScore(${1:ScoreType}, ${2:Label});"
-        ],
-        "description": "Show Leader Board for most points. Display label: label"
-    },
-    "LeaderBoardResources": {
-        "prefix": "LeaderBoardResources",
-        "body": [
-            "LeaderBoardResources(${1:ResourceType}, ${2:Label});"
-        ],
-        "description": "Show Leader Board for accumulation of most resource. Display label: label"
-    },
-    "LeaderBoardGoalControlAt": {
-        "prefix": "LeaderBoardGoalControlAt",
-        "body": [
-            "LeaderBoardGoalControlAt(${1:Goal}, ${2:Unit}, ${3:Location}, ${4:Label});"
-        ],
-        "description": "Show Leader Board for player closest to control of number of units at location. Display label: label"
-    },
-    "LeaderBoardGoalControl": {
-        "prefix": "LeaderBoardGoalControl",
-        "body": [
-            "LeaderBoardGoalControl(${1:Goal}, ${2:Unit}, ${3:Label});"
-        ],
-        "description": "Show Leader Board for player closest to control of number of unit. Display label: label"
-    },
-    "LeaderBoardGoalKills": {
-        "prefix": "LeaderBoardGoalKills",
-        "body": [
-            "LeaderBoardGoalKills(${1:Goal}, ${2:Unit}, ${3:Label});"
-        ],
-        "description": "Show Leader Board for player closest to number kills of unit. Display label: label"
-    },
-    "LeaderBoardGoalScore": {
-        "prefix": "LeaderBoardGoalScore",
-        "body": [
-            "LeaderBoardGoalScore(${1:Goal}, ${2:ScoreType}, ${3:Label});"
-        ],
-        "description": "Show Leader Board for player closest to number points. Display label: label"
-    },
-    "LeaderBoardGoalResources": {
-        "prefix": "LeaderBoardGoalResources",
-        "body": [
-            "LeaderBoardGoalResources(${1:Goal}, ${2:ResourceType}, ${3:Label});"
-        ],
-        "description": "Show Leader Board for player closest to accumulation of number resource. Display label: label"
-    },
-    "LeaderBoardComputerPlayers": {
-        "prefix": "LeaderBoardComputerPlayers",
-        "body": [
-            "LeaderBoardComputerPlayers(${1:State});"
-        ],
-        "description": "Set use of computer players in leaderboard calculations."
-    },
-    "MinimapPing": {
-        "prefix": "MinimapPing",
-        "body": [
-            "MinimapPing(${1:Where});"
-        ],
-        "description": "Show minimap ping for current player at location."
-    },
-    "ModifyUnitEnergy": {
-        "prefix": "ModifyUnitEnergy",
-        "body": [
-            "ModifyUnitEnergy(${1:Count}, ${2:Unit}, ${3:Owner}, ${4:Where}, ${5:Percent});"
-        ],
-        "description": "Set energy points for quantity units owned by player at location to percent%."
-    },
-    "ModifyUnitHangarCount": {
-        "prefix": "ModifyUnitHangarCount",
-        "body": [
-            "ModifyUnitHangarCount(${1:Add}, ${2:Count}, ${3:Unit}, ${4:Owner}, ${5:Where});"
-        ],
-        "description": "Add at most quantity to hangar for quantity units at location owned by player."
-    },
-    "ModifyUnitHitPoints": {
-        "prefix": "ModifyUnitHitPoints",
-        "body": [
-            "ModifyUnitHitPoints(${1:Count}, ${2:Unit}, ${3:Owner}, ${4:Where}, ${5:Percent});"
-        ],
-        "description": "Set hit points for quantity units owned by player at location to percent%."
-    },
-    "ModifyUnitResourceAmount": {
-        "prefix": "ModifyUnitResourceAmount",
-        "body": [
-            "ModifyUnitResourceAmount(${1:Count}, ${2:Owner}, ${3:Where}, ${4:NewValue});"
-        ],
-        "description": "Set resource amount for quantity resource sources owned by player at location to quantity."
-    },
-    "ModifyUnitShields": {
-        "prefix": "ModifyUnitShields",
-        "body": [
-            "ModifyUnitShields(${1:Count}, ${2:Unit}, ${3:Owner}, ${4:Where}, ${5:Percent});"
-        ],
-        "description": "Set shield points for quantity units owned by player at location to percent%."
-    },
-    "MoveLocation": {
-        "prefix": "MoveLocation",
-        "body": [
-            "MoveLocation(${1:Location}, ${2:OnUnit}, ${3:Owner}, ${4:DestLocation});"
-        ],
-        "description": "Center location labeled location on units owned by player at location."
-    },
-    "MoveUnit": {
-        "prefix": "MoveUnit",
-        "body": [
-            "MoveUnit(${1:Count}, ${2:UnitType}, ${3:Owner}, ${4:StartLocation}, ${5:DestLocation});"
-        ],
-        "description": "Move quantity units for player at location to destination."
-    },
-    "MuteUnitSpeech": {
-        "prefix": "MuteUnitSpeech",
-        "body": [
-            "MuteUnitSpeech();"
-        ],
-        "description": "Mute all non-trigger unit sounds for current player."
-    },
-    "Order": {
-        "prefix": "Order",
-        "body": [
-            "Order(${1:Unit}, ${2:Owner}, ${3:StartLocation}, ${4:OrderType}, ${5:DestLocation});"
-        ],
-        "description": "Issue order to all units owned by player at location: order to destination."
-    },
-    "PauseGame": {
-        "prefix": "PauseGame",
-        "body": [
-            "PauseGame();"
-        ],
-        "description": "Pause the game."
-    },
-    "PauseTimer": {
-        "prefix": "PauseTimer",
-        "body": [
-            "PauseTimer();"
-        ],
-        "description": "Pause the countdown timer."
-    },
-    "PlayWAV": {
-        "prefix": "PlayWAV",
-        "body": [
-            "PlayWAV(${1:WAVName});"
-        ],
-        "description": "Play WAV file"
-    },
-    "PreserveTrigger": {
-        "prefix": "PreserveTrigger",
-        "body": [
-            "PreserveTrigger();"
-        ],
-        "description": "Preserve Trigger."
-    },
-    "RemoveUnit": {
-        "prefix": "RemoveUnit",
-        "body": [
-            "RemoveUnit(${1:Unit}, ${2:Player});"
-        ],
-        "description": "Remove all units for player."
-    },
-    "RemoveUnitAt": {
-        "prefix": "RemoveUnitAt",
-        "body": [
-            "RemoveUnitAt(${1:Count}, ${2:Unit}, ${3:Where}, ${4:ForPlayer});"
-        ],
-        "description": "Remove quantity units for player at location."
-    },
-    "RunAIScript": {
-        "prefix": "RunAIScript",
-        "body": [
-            "RunAIScript(${1:Script});"
-        ],
-        "description": "Execute AI script script."
-    },
-    "RunAIScriptAt": {
-        "prefix": "RunAIScriptAt",
-        "body": [
-            "RunAIScriptAt(${1:Script}, ${2:Where});"
-        ],
-        "description": "Execute AI script script at location."
-    },
-    "SetAllianceStatus": {
-        "prefix": "SetAllianceStatus",
-        "body": [
-            "SetAllianceStatus(${1:Player}, ${2:Status});"
-        ],
-        "description": "Set Player to Ally status."
-    },
-    "SetCountdownTimer": {
-        "prefix": "SetCountdownTimer",
-        "body": [
-            "SetCountdownTimer(${1:TimeModifier}, ${2:Number});"
-        ],
-        "description": "Modify Countdown Timer: Set duration seconds."
-    },
-    "SetDeaths": {
-        "prefix": "SetDeaths",
-        "body": [
-            "SetDeaths(${1:Player}, ${2:Modifier}, ${3:Number}, ${4:Unit});"
-        ],
-        "description": "Modify death counts for player: Set quantity for unit."
-    },
-    "SetDoodadState": {
-        "prefix": "SetDoodadState",
-        "body": [
-            "SetDoodadState(${1:State}, ${2:Unit}, ${3:Owner}, ${4:Where});"
-        ],
-        "description": "Set doodad state for units for player at location."
-    },
-    "SetInvincibility": {
-        "prefix": "SetInvincibility",
-        "body": [
-            "SetInvincibility(${1:State}, ${2:Unit}, ${3:Owner}, ${4:Where});"
-        ],
-        "description": "Set invincibility for units owned by player at location"
-    },
-    "SetMissionObjectives": {
-        "prefix": "SetMissionObjectives",
-        "body": [
-            "SetMissionObjectives(${1:Text});"
-        ],
-        "description": "Set Mission Objectives to: text."
-    },
-    "SetNextScenario": {
-        "prefix": "SetNextScenario",
-        "body": [
-            "SetNextScenario(${1:ScenarioName});"
-        ],
-        "description": "Load scenario after completion of current game."
-    },
-    "SetResources": {
-        "prefix": "SetResources",
-        "body": [
-            "SetResources(${1:Player}, ${2:Modifier}, ${3:Amount}, ${4:ResourceType});"
-        ],
-        "description": "Modify resources for player: Set quantity resource."
-    },
-    "SetScore": {
-        "prefix": "SetScore",
-        "body": [
-            "SetScore(${1:Player}, ${2:Modifier}, ${3:Amount}, ${4:ScoreType});"
-        ],
-        "description": "Modify score for player: Set quantity points."
-    },
-    "SetSwitch": {
-        "prefix": "SetSwitch",
-        "body": [
-            "SetSwitch(${1:Switch}, ${2:State});"
-        ],
-        "description": "Set switch."
-    },
-    "TalkingPortrait": {
-        "prefix": "TalkingPortrait",
-        "body": [
-            "TalkingPortrait(${1:Unit}, ${2:Time});"
-        ],
-        "description": "Show unit talking to current player for duration milliseconds."
-    },
-    "Transmission": {
-        "prefix": "Transmission",
-        "body": [
-            "Transmission(${1:Unit}, ${2:Where}, ${3:WAVName}, ${4:TimeModifier}, ${5:Time}, ${6:Text}, ${7:AlwaysDisplay=4});"
-        ],
-        "description": "Send transmission to current player from unit at location.\nPlay WAV file. Modify transmission duration: Set number milliseconds.\nDisplay the following text: Text"
-    },
-    "UnMuteUnitSpeech": {
-        "prefix": "UnMuteUnitSpeech",
-        "body": [
-            "UnMuteUnitSpeech();"
-        ],
-        "description": "Unmute all non-trigger unit sounds for current player."
+
+
+    "Var Keyword": {
+        "prefix": "var",
+        "body": ["var"],
+        "description": "Define variable."
     },
-    "UnpauseGame": {
-        "prefix": "UnpauseGame",
-        "body": [
-            "UnpauseGame();"
-        ],
-        "description": "Unpause the game."
+    "Const Keyword": {
+        "prefix": "const",
+        "body": ["const"],
+        "description": "Define constant."
     },
-    "UnpauseTimer": {
-        "prefix": "UnpauseTimer",
-        "body": [
-            "UnpauseTimer();"
-        ],
-        "description": "Unpause the countdown timer."
+    "Static Keyword": {
+        "prefix": "static",
+        "body": ["static"],
+        "description": "Define static variable."
     },
-    "Victory": {
-        "prefix": "Victory",
-        "body": [
-            "Victory();"
-        ],
-        "description": "End scenario in victory for current player."
+
+    "True Constant": {
+        "prefix": "true",
+        "body": ["true"]
     },
-    "Wait": {
-        "prefix": "Wait",
-        "body": [
-            "Wait(${1:Time});"
-        ],
-        "description": "[Warning] Don't use Wait action UNLESS YOU KNOW WHAT YOU'RE DOING!"
+    "False Constant": {
+        "prefix": "false",
+        "body": ["false"]
     },
-    "SetMemory": {
-        "prefix": "SetMemory",
-        "body": [
-            "SetMemory(${1:dest}, ${2:modtype}, ${3:value});"
-        ],
-        "description": "Modify death counts for player: Set quantity for unit."
+    "None Constant": {
+        "prefix": "None",
+        "body": ["None"]
     },
-    "SetMemoryEPD": {
-        "prefix": "SetMemoryEPD",
+
+    
+    "EUDArray": {
+        "prefix": "EUDArray",
         "body": [
-            "SetMemoryEPD(${1:dest}, ${2:modtype}, ${3:value});"
+            "EUDArray(${1:size})"
         ],
-        "description": "Modify death counts for player: Set quantity for unit."
+        "description": "Define EUDArray."
     },
-    "SetNextPtr": {
-        "prefix": "SetNextPtr",
+
+    "getcurpl": {
+        "prefix": "getcurpl",
         "body": [
-            "SetNextPtr(${1:trg}, ${2:dest});"
+            "getcurpl()"
         ],
-        "description": "SetMemory(trg + 4, SetTo, dest)"
+        "description": "Return a value of CurrentPlayer"
     },
-    "Memory": {
-        "prefix": "Memory",
+    "setcurpl": {
+        "prefix": "setcurpl",
         "body": [
-            "Memory(${1:dest}, ${2:cmptype}, ${3:value})"
+            "setcurpl(${1:cp})"
         ],
-        "description": "Player has suffered quantity deaths of unit."
+        "description": "Set a value of CurrentPlayer"
     },
-    "MemoryEPD": {
-        "prefix": "MemoryEPD",
+    "SetKills": {
+        "prefix": "SetKills",
         "body": [
-            "MemoryEPD(${1:dest}, ${2:cmptype}, ${3:value})"
+            "SetKills(${1:Player}, ${2:Modifier}, ${3:Value}, ${4:Unit})"
         ],
-        "description": "Player has suffered quantity deaths of unit."
+        "description": "..."
     },
     
+    "dwepdread_epd": {
+        "prefix": "dwepdread_epd",
+        "body": [
+            "dwepdread_epd(${1:epd})"
+        ],
+        "description": "Read ptr/epd value from epd."
+    },
     "dwread_epd": {
         "prefix": "dwread_epd",
         "body": [
-            "dwread_epd(${1:dest})"
+            "dwread_epd(${1:epd})"
         ],
-        "description": "Read dword/epd value from epd."
+        "description": "Read a ptr value from epd."
+    },
+    "dwread": {
+        "prefix": "dwread",
+        "body": [
+            "dwread(${1:ptr})"
+        ],
+        "description": "Read a ptr value from ptr."
+    },
+    "epdread_epd": {
+        "prefix": "epdread_epd",
+        "body": [
+            "epdread_epd(${1:epd})"
+        ],
+        "description": "Read a epd value from epd."
+    },
+    
+    "dwbreak": {
+        "prefix": "dwbreak",
+        "body": [
+            "dwbreak(${1:dword})[[]]"
+        ],
+        "description": "Split dword to word/byte values."
+    },
+    "dwbreak2": {
+        "prefix": "dwbreak2",
+        "body": [
+            "dwbreak2(${1:dword})[[]]"
+        ],
+        "description": "Split dword to word/byte values. (maintain multiplier)"
+    },
+    
+    "dwadd": {
+        "prefix": "dwadd",
+        "body": [
+            "dwadd(${1:ptr}, ${2:value})"
+        ],
+        "description": "Add a value to ptr"
+    },
+    "dwsubtract": {
+        "prefix": "dwsubtract",
+        "body": [
+            "dwsubtract(${1:ptr}, ${2:value})"
+        ],
+        "description": "Subtract a value from ptr"
+    },
+    "dwwrite": {
+        "prefix": "dwwrite",
+        "body": [
+            "dwwrite(${1:ptr}, ${2:value})"
+        ],
+        "description": "Write a value to ptr"
+    },
+    "dwadd_epd": {
+        "prefix": "dwadd_epd",
+        "body": [
+            "dwadd_epd(${1:epd}, ${2:value})"
+        ],
+        "description": "Add a value to epd"
+    },
+    "dwsubtract_epd": {
+        "prefix": "dwsubtract_epd",
+        "body": [
+            "dwsubtract_epd(${1:epd}, ${2:value})"
+        ],
+        "description": "Subtract a value from epd"
+    },
+    "dwwrite_epd": {
+        "prefix": "dwwrite_epd",
+        "body": [
+            "dwwrite_epd(${1:epd}, ${2:value})"
+        ],
+        "description": "Write a value to epd"
+    },
+
+    "bread": {
+        "prefix": "bread",
+        "body": [
+            "bread(${1:ptr})"
+        ],
+        "description": "Read a byte value from ptr"
+    },
+    "bwrite": {
+        "prefix": "bwrite",
+        "body": [
+            "bwrite(${1:ptr}, ${3:value})"
+        ],
+        "description": "Write a byte value to ptr"
+    },
+    "bread_epd": {
+        "prefix": "bread_epd",
+        "body": [
+            "bread_epd(${1:epd}, ${2:byte})"
+        ],
+        "description": "Read a byte value from epd"
+    },
+    "bwrite_epd": {
+        "prefix": "bwrite_epd",
+        "body": [
+            "bwrite_epd(${1:epd}, ${2:byte}, ${3:value})"
+        ],
+        "description": "Write a byte value to epd"
+    },
+
+    "wread": {
+        "prefix": "wread",
+        "body": [
+            "wread(${1:ptr})"
+        ],
+        "description": "Read a word value from ptr"
+    },
+    "wwrite": {
+        "prefix": "wwrite",
+        "body": [
+            "wwrite(${1:ptr}, ${3:value})"
+        ],
+        "description": "Write a word value to ptr"
+    },
+    "wread_epd": {
+        "prefix": "wread_epd",
+        "body": [
+            "wread_epd(${1:epd}, ${2:word})"
+        ],
+        "description": "Read a word value from epd"
+    },
+    "wwrite_epd": {
+        "prefix": "wwrite_epd",
+        "body": [
+            "wwrite_epd(${1:epd}, ${2:word}, ${3:value})"
+        ],
+        "description": "Write a word value to epd"
+    },
+    "maskread_epd": {
+        "prefix": "maskread_epd",
+        "body": [
+            "maskread_epd(${1:epd}, ${2:mask})"
+        ],
+        "description": "Read a value in the mask range from epd"
+    },
+    "maskread_cp": {
+        "prefix": "maskread_cp",
+        "body": [
+            "maskread_cp(${1:cpo}, ${2:mask})"
+        ],
+        "description": "Read a value in the mask range from cp"
+    },
+    "bwrite_cp": {
+        "prefix": "bwrite_cp",
+        "body": [
+            "bwrite_cp(${1:cpo}, ${2:byte}, ${3:value})"
+        ],
+        "description": "Write a byte value from cp"
+    },
+    "wwrite_cp": {
+        "prefix": "wwrite_cp",
+        "body": [
+            "wwrite_cp(${1:cpo}, ${2:byte}, ${3:value})"
+        ],
+        "description": "Write a word value from cp"
+    },
+    "dwwrite_cp": {
+        "prefix": "dwwrite_cp",
+        "body": [
+            "dwwrite_cp(${1:cpo}, ${3:value})"
+        ],
+        "description": "Write a value from cp"
+    },
+    "bread_cp": {
+        "prefix": "bread_cp",
+        "body": [
+            "bread_cp(${1:cpo}, ${2:byte})"
+        ],
+        "description": "Read a byte value from cp"
+    },
+    "wread_cp": {
+        "prefix": "wread_cp",
+        "body": [
+            "wread_cp(${1:cpo}, ${2:byte})"
+        ],
+        "description": "Read a word value from cp"
+    },
+    "dwread_cp": {
+        "prefix": "dwread_cp",
+        "body": [
+            "dwread_cp(${1:cpo})"
+        ],
+        "description": "Read a value from cp"
+    },
+    "cunitepdread_epd": {
+        "prefix": "cunitepdread_epd",
+        "body": [
+            "cunitepdread_epd(${1:epd})"
+        ],
+        "description": "Return ptr, epd."
+    },
+    "cunitread_epd": {
+        "prefix": "cunitread_epd",
+        "body": [
+            "cunitread_epd(${1:epd})"
+        ],
+        "description": "Return ptr."
+    },
+    "epdcunitread_epd": {
+        "prefix": "epdcunitread_epd",
+        "body": [
+            "epdcunitread_epd(${1:epd})"
+        ],
+        "description": "..."
+    },
+    "epdcunitread_cp": {
+        "prefix": "epdcunitread_cp",
+        "body": [
+            "epdcunitread_cp(${1:cpo})"
+        ],
+        "description": "..."
+    },
+    "spriteread_epd": {
+        "prefix": "spriteread_epd",
+        "body": [
+            "spriteread_epd(${1:epd})"
+        ],
+        "description": "Read CSprite ptr."
+    },
+    "spriteread_cp": {
+        "prefix": "spriteread_cp",
+        "body": [
+            "spriteread_cp(${1:cpo})"
+        ],
+        "description": "Read CSprite ptr."
+    },
+    "spriteepdread_epd": {
+        "prefix": "spriteepdread_epd",
+        "body": [
+            "spriteepdread_epd(${1:epd})"
+        ],
+        "description": "Read CSprite ptr, epd."
+    },
+    "spriteepdread_cp": {
+        "prefix": "spriteepdread_cp",
+        "body": [
+            "spriteepdread_cp(${1:cpo})"
+        ],
+        "description": "Read CSprite ptr, epd."
+    },
+    "epdspriteread_epd": {
+        "prefix": "epdspriteread_epd",
+        "body": [
+            "epdspriteread_epd(${1:epd})"
+        ],
+        "description": "Read CSprite epd."
+    },
+    "epdspriteread_cp": {
+        "prefix": "epdspriteread_cp",
+        "body": [
+            "epdspriteread_cp(${1:cpo})"
+        ],
+        "description": "Read CSprite epd."
+    },
+
+
+    "srand": {
+        "prefix": "srand",
+        "body": [
+            "srand(${1:seed})"
+        ],
+        "description": "Set a random seed."
+    },
+    "getseed": {
+        "prefix": "getseed",
+        "body": [
+            "getseed(${1:seed})"
+        ],
+        "description": "Get a random seed."
+    },
+    "dwrand": {
+        "prefix": "dwrand",
+        "body": [
+            "dwrand()"
+        ],
+        "description": "Get a random dword value."
+    },
+    "rand": {
+        "prefix": "rand",
+        "body": [
+            "rand()"
+        ],
+        "description": "Get a random word value."
+    },
+    "randomize": {
+        "prefix": "randomize",
+        "body": [
+            "randomize()"
+        ],
+        "description": "Randomize a random seed."
+    },
+
+    "atan2": {
+        "prefix": "atan2",
+        "body": [
+            "atan2(${1:y}, ${2:x})"
+        ],
+        "description": "Return a arctangent value of y/x."
+    },
+    "lengthdir": {
+        "prefix": "lengthdir",
+        "body": [
+            "lengthdir(${1:length}, ${2:angle})"
+        ],
+        "description": "Return dx, dy value of 'length' distance from starting point and in direction 'angle'."
+    },
+    "sqrt": {
+        "prefix": "sqrt",
+        "body": [
+            "sqrt(${1:value})"
+        ],
+        "description": "Return a square root."
+    },
+
+    "playerexist": {
+        "prefix": "playerexist",
+        "body": [
+            "playerexist(${1:player})"
+        ],
+        "description": "Check is player exists."
+    },
+    
+    "EUDBinaryMax": {
+        "prefix": "EUDBinaryMax",
+        "body": [
+            "EUDBinaryMax(${1:cond}, ${1:min}, ${1:max})"
+        ],
+        "description": "Return a max value in [min, max] range which satisfy cond."
+    },
+    "EUDBinaryMin": {
+        "prefix": "EUDBinaryMin",
+        "body": [
+            "EUDBinaryMin(${1:cond}, ${1:min}, ${1:max})"
+        ],
+        "description": "Return a minimum value in [min, max] range which satisfy cond."
+    },
+    
+    "EUDLoopRange": {
+        "prefix": "EUDLoopRange",
+        "body": [
+            "EUDLoopRange(${1:start}, ${1:end})"
+        ],
+        "description": "Loop [start, end) range."
+    },
+    "EUDLoopUnit": {
+        "prefix": "EUDLoopUnit",
+        "body": [
+            "EUDLoopUnit()"
+        ],
+        "description": "Loop all CUnits."
+    },
+    "EUDLoopUnit2": {
+        "prefix": "EUDLoopUnit2",
+        "body": [
+            "EUDLoopUnit2()"
+        ],
+        "description": "Loop all CUnits."
+    },
+    "EUDLoopNewUnit": {
+        "prefix": "EUDLoopNewUnit",
+        "body": [
+            "EUDLoopNewUnit(${1:gas})"
+        ],
+        "description": "Loop new CUnits."
+    },
+    "EUDPlayerLoop Loop": {
+        "prefix": "EUDPlayerLoop",
+        "body": [
+            "EUDPlayerLoop()(); {",
+            "\t$0",
+            "EUDEndPlayerLoop();"
+        ],
+        "description": "Loop all players who is in the game. It changes the value of CurrentPlayer."
+    },
+    "EUDLoopPlayer Loop": {
+        "prefix": "EUDLoopPlayer",
+        "body": [
+            "EUDLoopPlayer(${1:playerType}, ${2:force}, ${3:race})"
+        ],
+        "description": "Loop all players who satisfy the condition. It doesn't change the value of CurrentPlayer"
+    },
+    "Unit Group Loop": {
+        "prefix": "UnitGroup",
+        "body": [
+            "UnitGroup(${1:size})"
+        ],
+        "description": "Loop Unit Group."
+    },
+
+    "EUDTurbo": {
+        "prefix": "EUDTurbo",
+        "body": [
+            "SetMemoryEPD(EPD(0x6509A0), SetTo, 0);"
+        ],
+        "description": "..."
+    },
+    "getuserplayerid": {
+        "prefix": "getuserplayerid",
+        "body": [
+            "getuserplayerid()"
+        ],
+        "description": "Get your Current Player. (desync)"
+    },
+    "b2u": {
+        "prefix": "b2u",
+        "body": [
+            "b2u(${1:value})"
+        ],
+        "description": "Convert byte to utf. (for Python 3)"
+    },
+    "u2b": {
+        "prefix": "u2b",
+        "body": [
+            "u2b(${1:value})"
+        ],
+        "description": "Convert utf to byte. (for Python 3)"
+    },
+    "GetChkTokenized": {
+        "prefix": "GetChkTokenized",
+        "body": [
+            "GetChkTokenized()"
+        ],
+        "description": "Can read and write CHK data directly"
+    },
+    "MPQAddFile": {
+        "prefix": "MPQAddFile",
+        "body": [
+            "MPQAddFile(${1:fname}, ${2:content}, ${3:isWave})"
+        ],
+        "description": "Put the file into the Map MPQ."
+    },
+    "MPQAddWave": {
+        "prefix": "MPQAddWave",
+        "body": [
+            "MPQAddWave(${1:fname}, ${2:content})"
+        ],
+        "description": "Put the WAV file into the Map MPQ."
+    },
+    "Db": {
+        "prefix": "Db",
+        "body": [
+            "Db(${1:data})"
+        ],
+        "description": "..."
+    },
+    "EUDVArray": {
+        "prefix": "EUDVArray",
+        "body": [
+            "EUDVArray(${1:size})(${2:init})"
+        ],
+        "description": "Define EUDVArray."
+    },
+    "PVariable": {
+        "prefix": "PVariable",
+        "body": [
+            "PVariable()"
+        ],
+        "description": "Define PVariable."
+    },
+    "EPD": {
+        "prefix": "EPD",
+        "body": [
+            "EPD(${1:ptr})"
+        ],
+        "description": "Convert ptr to epd."
+    },
+    "div": {
+        "prefix": "div",
+        "body": [
+            "div(${1:a}, ${2:b})"
+        ],
+        "description": "Returns the quotient and remainder of dividing a by b."
+    },
+    "getlocTL": {
+        "prefix": "getlocTL",
+        "body": [
+            "getlocTL(${1:location})"
+        ],
+        "description": "Returns the Left and Top coordinates of Location."
+    },
+    "setloc": {
+        "prefix": "setloc",
+        "body": [
+            "setloc(${1:location}, ${2:x}, ${3:y})"
+        ],
+        "description": "Set location's X, Y coordinate to entered values."
+    },
+    "setloc_epd": {
+        "prefix": "setloc_epd",
+        "body": [
+            "setloc_epd(${1:location}, ${2:epd})"
+        ],
+        "description": "Set location's X, Y coordinate to epd's position."
+    },
+    "addloc": {
+        "prefix": "addloc",
+        "body": [
+            "addloc(${1:locIndex}, ${2:x}, ${3:y})"
+        ],
+        "description": "add entered values to location's LEFT-TOP and RIGHT-LOW coordinate. use for parallel movement."
+    },
+    "posread_epd": {
+        "prefix": "posread_epd",
+        "body": [
+            "posread_epd(${1:epd})"
+        ],
+        "description": "Returns the x,y position of epd."
+    },
+    "posread_cp": {
+        "prefix": "posread_cp",
+        "body": [
+            "posread_cp(${1:cpo})"
+        ],
+        "description": "Returns the x,y position of cp."
+    },
+    "simpleprint": {
+        "prefix": "simpleprint",
+        "body": [
+            "simpleprint(${1:*args})"
+        ],
+        "description": "for debugging."
+    },
+    "GetMapStringAddr": {
+        "prefix": "GetMapStringAddr",
+        "body": [
+            "GetMapStringAddr(${1:stringIndex})"
+        ],
+        "description": "Get the address of the string Index."
+    },
+    "strcmp": {
+        "prefix": "strcmp",
+        "body": [
+            "strcmp(${1:str1}, ${2:str2})"
+        ],
+        "description": "Compare two strings."
+    },
+    "strcpy": {
+        "prefix": "strcpy",
+        "body": [
+            "strcpy(${1:dst}, ${2:src})"
+        ],
+        "description": "Copy src to dst."
+    },
+    "memcpy": {
+        "prefix": "memcpy",
+        "body": [
+            "memcpy(${1:dst}, ${2:src}, ${3:size})"
+        ],
+        "description": "Copy src to dst."
+    },
+    "strlen": {
+        "prefix": "strlen",
+        "body": [
+            "strlen(${1:ptr})"
+        ],
+        "description": "Return a string length."
+    },
+    "strlen_epd": {
+        "prefix": "strlen_epd",
+        "body": [
+            "strlen_epd(${1:epd}, ${2:subp})"
+        ],
+        "description": "Return a string length."
+    },
+    "StringBuffer": {
+        "prefix": "StringBuffer",
+        "body": [
+            "StringBuffer(${1:size})"
+        ],
+        "description": "Define StringBuffer."
+    },
+    "ptr2s": {
+        "prefix": "ptr2s",
+        "body": [
+            "ptr2s(${1:ptr})"
+        ],
+        "description": "Convert ptr to string."
+    },
+    "epd2s": {
+        "prefix": "epd2s",
+        "body": [
+            "epd2s(${1:epd})"
+        ],
+        "description": "Convert epd to string."
+    },
+    "PName": {
+        "prefix": "PName",
+        "body": [
+            "PName(${1:player})"
+        ],
+        "description": "Return player`s Name."
+    },
+    "PColor": {
+        "prefix": "PColor",
+        "body": [
+            "PColor(${1:player})"
+        ],
+        "description": "Return player`s Color."
+    },
+    "eprintln": {
+        "prefix": "eprintln",
+        "body": [
+            "eprintln(${1:*args})"
+        ],
+        "description": "Prints content to CurrentPlayer on the error line."
+    },
+    "eprintf": {
+        "prefix": "eprintf",
+        "body": [
+            "eprintf(${1:format_string}, ${2:*args})"
+        ],
+        "description": "Prints content to CurrentPlayer on the error line. (formatting)"
+    },
+    "IsUserCP": {
+        "prefix": "IsUserCP",
+        "body": [
+            "IsUserCP()"
+        ],
+        "description": "Compare CurrentPlayer. (desync)"
+    },
+    "printAll": {
+        "prefix": "printAll",
+        "body": [
+            "printAll(${1:format_string}, ${2:*args})"
+        ],
+        "description": "Print text to all players. (formatting)"
+    },
+    "printAllAt": {
+        "prefix": "printAllAt",
+        "body": [
+            "printAllAt(${1:line}, ${2:format_string}, ${3:*args})"
+        ],
+        "description": "Print text to all players at a line. (formatting)"
+    },
+    "eprintAll": {
+        "prefix": "eprintAll",
+        "body": [
+            "eprintAll(${1:format_string}, ${2:*args})"
+        ],
+        "description": "Print text to all players on the error line. (formatting)"
+    },
+    "EPDCUnitMap": {
+        "prefix": "EPDCUnitMap",
+        "body": [
+            "EPDCUnitMap(${1:epd})"
+        ],
+        "description": "EPDCUnitMap"
+    },
+    "IsPName": {
+        "prefix": "IsPName",
+        "body": [
+            "IsPName(${1:player}, ${2:name})"
+        ],
+        "description": "Match the player's name."
+    },
+    "pow": {
+        "prefix": "pow",
+        "body": [
+            "pow(${1:a}, ${2:b})"
+        ],
+        "description": "Calculates a to b squared. (a ** b)"
+    },
+    "EUDQueue": {
+        "prefix": "EUDQueue",
+        "body": [
+            "EUDQueue(${1:size})()"
+        ],
+        "description": "Define EUDQueue."
+    },
+    "DisplayTextAt": {
+        "prefix": "DisplayTextAt",
+        "body": [
+            "DisplayTextAt(${1:line}, ${2:text})"
+        ],
+        "description": "..."
+    },
+    "DisplayTextAll": {
+        "prefix": "DisplayTextAll",
+        "body": [
+            "DisplayTextAll(${1:text})"
+        ],
+        "description": "..."
+    },
+    "PlayWAVAll": {
+        "prefix": "PlayWAVAll",
+        "body": [
+            "PlayWAVAll(${1:wav})"
+        ],
+        "description": "..."
+    },
+    "MinimapPingAll": {
+        "prefix": "MinimapPingAll",
+        "body": [
+            "MinimapPingAll(${1:location})"
+        ],
+        "description": "..."
+    },
+    "CenterViewAll": {
+        "prefix": "CenterViewAll",
+        "body": [
+            "CenterViewAll(${1:location})"
+        ],
+        "description": "..."
+    },
+    "SetMissionObjectivesAll": {
+        "prefix": "SetMissionObjectivesAll",
+        "body": [
+            "SetMissionObjectivesAll(${1:text})"
+        ],
+        "description": "..."
+    },
+    "TalkingPortraitAll": {
+        "prefix": "TalkingPortraitAll",
+        "body": [
+            "TalkingPortraitAll(${1:unit}, ${2:time})"
+        ],
+        "description": "..."
+    },
+    "maskwrite_epd": {
+        "prefix": "maskwrite_epd",
+        "body": [
+            "maskwrite_epd(${1:epd}, ${2:value}, ${3:mask})"
+        ],
+        "description": "Write a value in the mask range from epd."
+    },
+    "maskwrite_cp": {
+        "prefix": "maskwrite_cp",
+        "body": [
+            "maskwrite_cp(${1:cpo}, ${2:value}, ${3:mask})"
+        ],
+        "description": "Write a value in the mask range from cp."
+    },
+    "dilateloc": {
+        "prefix": "dilateloc",
+        "body": [
+            "dilateloc(${1:location}, ${2:x}, ${3:y})"
+        ],
+        "description": "Set the size of Location."
+    },
+    "SetPName": {
+        "prefix": "SetPName",
+        "body": [
+            "SetPName(${1:player}, ${2:*args})"
+        ],
+        "description": "..."
+    },
+    "SetPNamef": {
+        "prefix": "SetPNamef",
+        "body": [
+            "SetPNamef(${1:player}, ${2:format_string}, ${3:*args})"
+        ],
+        "description": "..."
+    },
+    "settbl": {
+        "prefix": "settbl",
+        "body": [
+            "settbl(${1:tblID}, ${2:offset}, ${3:contents})"
+        ],
+        "description": "..."
+    },
+    "settbl2": {
+        "prefix": "settbl2",
+        "body": [
+            "settbl2(${1:tblID}, ${2:offset}, ${3:contents})"
+        ],
+        "description": "..."
+    },
+    "settblf": {
+        "prefix": "settblf",
+        "body": [
+            "settbl(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
+        ],
+        "description": "..."
+    },
+    "settblf2": {
+        "prefix": "settblf2",
+        "body": [
+            "settbl2(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
+        ],
+        "description": "..."
+    },
+    "GetTBLAddr": {
+        "prefix": "GetTBLAddr",
+        "body": [
+            "GetTBLAddr(${1:tblID})"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_MinimapPing": {
+        "prefix": "QueueGameCommand_MinimapPing",
+        "body": [
+            "QueueGameCommand_MinimapPing(${1:xy})"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_QueuedRightClick": {
+        "prefix": "QueueGameCommand_QueuedRightClick",
+        "body": [
+            "QueueGameCommand_QueuedRightClick(${1:xy})"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_PauseGame": {
+        "prefix": "QueueGameCommand_PauseGame",
+        "body": [
+            "QueueGameCommand_PauseGame()"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_ResumeGame": {
+        "prefix": "QueueGameCommand_ResumeGame",
+        "body": [
+            "QueueGameCommand_ResumeGame()"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_RestartGame": {
+        "prefix": "QueueGameCommand_RestartGame",
+        "body": [
+            "QueueGameCommand_RestartGame()"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_LeaveGame": {
+        "prefix": "QueueGameCommand_LeaveGame",
+        "body": [
+            "QueueGameCommand_LeaveGame()"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_UseCheat": {
+        "prefix": "QueueGameCommand_UseCheat",
+        "body": [
+            "QueueGameCommand_UseCheat(${1:flags})"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_TrainUnit": {
+        "prefix": "QueueGameCommand_TrainUnit",
+        "body": [
+            "QueueGameCommand_TrainUnit(${1:unit})"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_MergeArchon": {
+        "prefix": "QueueGameCommand_MergeArchon",
+        "body": [
+            "QueueGameCommand_MergeArchon()"
+        ],
+        "description": "..."
+    },
+    "QueueGameCommand_MergeDarkArchon": {
+        "prefix": "QueueGameCommand_MergeDarkArchon",
+        "body": [
+            "QueueGameCommand_MergeDarkArchon()"
+        ],
+        "description": "..."
     }
 }

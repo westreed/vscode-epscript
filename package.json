@@ -5,7 +5,7 @@
     "dependencies": {
         "tar": ">=4.4.2"
     },
-    "version": "0.0.1",
+    "version": "0.1.0",
     "author": "Armoha",
     "license": "MIT",
     "repository": {
@@ -44,6 +44,14 @@
             {
                 "language": "epscript",
                 "path": "./snippets/epscript.json"
+            },
+            {
+                "language": "epscript",
+                "path": "./snippets/epscriptTrigger.json"
+            },
+            {
+                "language": "epscript",
+                "path": "./snippets/epscriptTriggerConst.json"
             }
         ]
     }
