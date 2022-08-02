@@ -1005,14 +1005,14 @@
     "settblf": {
         "prefix": "settblf",
         "body": [
-            "settbl(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
+            "settblf(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
         ],
         "description": "..."
     },
     "settblf2": {
         "prefix": "settblf2",
         "body": [
-            "settbl2(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
+            "settblf2(${1:tblID}, ${2:offset}, ${3:format_string}, ${4:contents})"
         ],
         "description": "..."
     },
@@ -1090,6 +1090,13 @@
         "prefix": "QueueGameCommand_MergeDarkArchon",
         "body": [
             "QueueGameCommand_MergeDarkArchon()"
+        ],
+        "description": "..."
+    },
+    "DoActions": {
+        "prefix": "DoActions",
+        "body": [
+            "DoActions(${1:*args});"
         ],
         "description": "..."
     }
